@@ -10,4 +10,4 @@ gTTS: pip install gTTS
 SQLite3: bereits Teil von Python
 Bevor Sie das Programm ausführen, stellen Sie sicher, dass die SQLite-Datenbank "bed_storys.db" im selben Verzeichnis wie das Hauptprogramm gespeichert ist.
 
-Biite beachten das es sich momentan noch im Alpha-Stadium befindet, heißt die Grundfunktion geht aber die GUI ist noch ziemlich "Unschön".
+Bitte beachten das es sich momentan noch im Alpha-Stadium befindet, heißt die Grundfunktion geht aber die GUI ist noch ziemlich "Unschön".
