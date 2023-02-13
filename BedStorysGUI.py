@@ -3,6 +3,10 @@ from PyQt5 import QtWidgets, QtGui
 from Speech import text_to_speech
 
 class BedStorysGUI(QtWidgets.QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
     def initUI(self):
         # Create the "Get Random Text" button and place it on the window
         btn = QtWidgets.QPushButton("Get Random Text", self)
