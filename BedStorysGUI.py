@@ -1,75 +1,61 @@
 import sys
 import time
 from PyQt5 import QtWidgets, QtGui, QtCore, QtMultimedia
-from functions import get_text_from_database
-from functions import play_text_with_tts
-from functions import highlight_text_while_playing
+from functions import get_text_from_database, play_text_with_tts, get_story_titles_from_database
 
-# Die Hauptklasse für die GUI
 class BedStorysGUI(QtWidgets.QMainWindow):
     def __init__(self):
-        # Ruft den Konstruktor der übergeordneten Klasse auf
         super().__init__()
         self.initUI()
 
-    # Initialisiert die Benutzeroberfläche
     def initUI(self):
-        # Erstelle einen Button
-        btn = QtWidgets.QPushButton("Zufällige Geschichte", self)
-        # Verbinde das Klicken des Buttons mit der Methode get_text
-        btn.clicked.connect(self.get_text)
-        #btn.resize(btn.sizeHint())
-        btn.move(50, 50)
+        self.listWidget = QtWidgets.QListWidget(self)
+        self.listWidget.move(50, 50)
+        self.listWidget.resize(200, 400)
+        self.listWidget.itemClicked.connect(self.play_text_from_title)
 
-        # Erstelle eine TextEdit-Komponente
+        titles = self.get_titles_from_database()
+        for title in titles:
+            self.listWidget.addItem(title)
+
         self.textEdit = QtWidgets.QTextEdit(self)
-        self.textEdit.move(50, 100)
+        self.textEdit.move(270, 50)
         self.textEdit.resize(400, 400)
         self.textEdit.setReadOnly(True)
 
-        # Erstelle eine PushButton-Komponente
-        # self.pauseButton = QtWidgets.QPushButton("Pause", self)
-        # self.pauseButton.move(200, 50)
+        self.playButton = QtWidgets.QPushButton("Play", self)
+        self.playButton.move(50, 470)
 
-        # Verbinde das Klicken der Schaltfläche mit einer Methode
-        # self.pauseButton.clicked.connect(self.pause_text)
+        self.playButton.clicked.connect(self.play_current_text)
 
-        # Erstelle eine PushButton-Komponente
-        # self.playButton = QtWidgets.QPushButton("Play", self)
-        # self.playButton.move(300, 50)
-
-        # Verbinde das Klicken der Schaltfläche mit einer Methode
-        # self.playButton.clicked.connect(self.play_text)
-        # self.playButton.setEnabled(False)
-
-        # Setze das Fenster auf die gegebenen Koordinaten und Größe
-        self.setGeometry(500, 300, 500, 550)
-        # Setze den Fenstertitel
+        self.setGeometry(500, 300, 700, 550)
         self.setWindowTitle("Mat´s Geschichten Vorleser")
-        # Zeige das Fenster
         self.show()
 
-    # Holt einen zufälligen Text aus der Datenbank und setzt ihn im Label
-    def get_text(self):
-        text = get_text_from_database()
+    def get_titles_from_database(self):
+        titles = get_story_titles_from_database()
+        return titles
+
+    def play_text_from_title(self, item):
+        text = get_text_from_database(item.text())
         if text:
+            self.current_text = text
             self.textEdit.setText(text)
-            self.play_text(text)
+            self.playButton.setEnabled(True)
 
-    # Pausiert den Audio-Player
-    def pause_text(self):
-        self.media_player.pause()
-        self.playButton.setEnabled(True)
-        self.pauseButton.setEnabled(False)      
+    def play_current_text(self):
+        self.playButton.setEnabled(False)
 
-    # Spielt den gegebenen Text mit Text-to-Speech ab
-    def play_text(self, text):
-        file_name = play_text_with_tts(text)
+        file_name = play_text_with_tts(self.current_text)
 
         self.media_player = QtMultimedia.QMediaPlayer(self)
         self.media_player.setMedia(QtMultimedia.QMediaContent(QtCore.QUrl.fromLocalFile(file_name)))
         self.media_player.play()
 
+        while self.media_player.state() == QtMultimedia.QMediaPlayer.PlayingState:
+            QtWidgets.QApplication.processEvents()
+
+        self.playButton.setEnabled(True)
 
 # Hauptprogramm
 if __name__ == '__main__':
