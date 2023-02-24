@@ -1,6 +1,6 @@
 # Bed-Time-Storys-Reader
 
-Dieses Programm ist eine GUI-Anwendung, die eine Zufallsgeschichte aus einer SQLite-Datenbank abruft und sie als Text und Sprache ausgibt.
+Dieses Programm ist eine GUI-Anwendung, die eine Kindergeschichte aus einer SQLite-Datenbank abruft und sie als Text und Sprache ausgibt.
 
 Für die Ausführung des Programms sind folgende Komponenten erforderlich:
 
