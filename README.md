@@ -1,14 +1,17 @@
-# Bed-Time-Storys-Reader
+# BedStorysGUI
 
-Dieses Programm ist eine GUI-Anwendung, die eine Kindergeschichte aus einer SQLite-Datenbank abruft und sie als Text und Sprache ausgibt.
+BedStorysGUI ist eine GUI-Anwendung zum Abspielen von Text-to-Speech-Geschichten aus einer Datenbank.
+Die Anwendung ist als Desktop-Applikation entwickelt und läuft unter Windows.
 
-Für die Ausführung des Programms sind folgende Komponenten erforderlich:
+## Verwendung
 
-Python 3
-PyQt5: pip install PyQt5
-gTTS: pip install gTTS
-SQLite3: bereits Teil von Python
-Bevor Sie das Programm ausführen, stellen Sie sicher, dass die SQLite-Datenbank "bed_storys.db" im selben Verzeichnis wie das Hauptprogramm gespeichert ist.
+1. Installieren Sie die PyQt5-Bibliothek: `pip install PyQt5`
+2. Führen Sie die Anwendung aus: `python BedStorysGUI.py`
+3. Wählen Sie eine Geschichte aus der Liste auf der linken Seite aus.
+4. Klicken Sie auf die Schaltfläche "Play", um die Geschichte anzuhören.
+5. Verwenden Sie die Schaltflächen "Pause" und "Resume", um die Audio-Wiedergabe zu steuern.
+6. Verwenden Sie den Lautstärkeschieberegler, um die Audio-Lautstärke anzupassen.
 
-Ein in Arbeit befindliches Programm.
-Ich versuche stetig Verbesserungen einzufügen.
+## Author
+
+BedStoryGUI wurde von Satisfraction erstellt.
