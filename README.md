@@ -1,17 +1,19 @@
-# BedStorysGUI
+# Bedtime Stories GUI
 
-BedStorysGUI ist eine GUI-Anwendung zum Abspielen von Text-to-Speech-Geschichten aus einer Datenbank.
-Die Anwendung ist als Desktop-Applikation entwickelt und läuft unter Windows.
+Bedtime Stories GUI ist eine Desktop-Anwendung für Windows, die Text-to-Speech-Geschichten aus einer Datenbank abspielt.
+Beachten Sie, dass sich die Datenbankdatei `bed_storys.db` im selben Verzeichnis wie die Anwendung befinden muss.
 
 ## Verwendung
 
 1. Installieren Sie die PyQt5-Bibliothek: `pip install PyQt5`
-2. Führen Sie die Anwendung aus: `python BedStorysGUI.py`
+2. Führen Sie die Anwendung aus: `python BedtimeStoriesGUI.py`
 3. Wählen Sie eine Geschichte aus der Liste auf der linken Seite aus.
-4. Klicken Sie auf die Schaltfläche "Play", um die Geschichte anzuhören.
-5. Verwenden Sie die Schaltflächen "Pause" und "Resume", um die Audio-Wiedergabe zu steuern.
-6. Verwenden Sie den Lautstärkeschieberegler, um die Audio-Lautstärke anzupassen.
+4. Klicken Sie auf die Schaltfläche "Abspielen", um die Geschichte anzuhören.
+5. Verwenden Sie die Schaltflächen "Pause" und "Fortsetzen", um die Audiowiedergabe zu steuern.
+6. Verwenden Sie den Lautstärkeregler, um die Audio-Lautstärke anzupassen.
 
-## Author
+Diese Anwendung ist darauf ausgelegt, mithilfe der Text-to-Speech-Funktion Gutenachtgeschichten für Kinder vorzulesen.
 
-BedStoryGUI wurde von Satisfraction erstellt.
+## Autor
+
+BedStorysGUI wurde von Satisfraction erstellt.
