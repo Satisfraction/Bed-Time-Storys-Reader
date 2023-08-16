@@ -6,8 +6,8 @@ from functions import get_text_from_database, play_text_with_tts, get_story_titl
 class BedStorysGUI(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
-        self.initUI()
         self.media_player = None
+        self.initUI()
 
     def initUI(self):
         self.setStyleSheet("background-color: #EFEFEF;")
@@ -17,8 +17,12 @@ class BedStorysGUI(QtWidgets.QMainWindow):
         self.setFont(font)
         self.setWindowTitle("Mat´s Geschichten Vorleser")
 
-        self.listWidget = QtWidgets.QListWidget(self)
-        self.listWidget.setGeometry(50, 50, 200, 400)
+        # Remove existing layout
+        central_widget = QtWidgets.QWidget()
+        self.setCentralWidget(central_widget)
+        self.layout = QtWidgets.QHBoxLayout(central_widget)
+
+        self.listWidget = QtWidgets.QListWidget()
         self.listWidget.setStyleSheet("background-color: #D3D3D3; border: 2px solid black;")
         self.listWidget.setFont(QtGui.QFont("Arial", 14))
         self.listWidget.itemClicked.connect(self.play_text_from_title)
@@ -29,35 +33,50 @@ class BedStorysGUI(QtWidgets.QMainWindow):
             item.setBackground(QtGui.QColor("#F5F5F5"))
             self.listWidget.addItem(item)
 
-        self.textEdit = QtWidgets.QTextEdit(self)
-        self.textEdit.setGeometry(270, 50, 400, 400)
+        self.textEdit = QtWidgets.QTextEdit()
         self.textEdit.setStyleSheet("background-color: #D3D3D3; border: 2px solid black;")
-        self.textEdit.setFont(QtGui.QFont("Arial", 14))
+        self.textEdit.setFont(QtGui.QFont("Arial", 18))
         self.textEdit.setReadOnly(True)
 
-        self.playButton = QtWidgets.QPushButton("Play", self)
-        self.playButton.setGeometry(50, 470, 80, 40)
+        button_layout = QtWidgets.QHBoxLayout()
+        self.playButton = QtWidgets.QPushButton("Play")
         self.playButton.setStyleSheet("background-color: green; color: white; border-radius: 5px;")
+        self.playButton.setFont(QtGui.QFont("Arial", 16))
+        self.playButton.setMinimumHeight(40)
         self.playButton.clicked.connect(self.play_current_text)
-
-        self.pauseButton = QtWidgets.QPushButton("Pause", self)
-        self.pauseButton.setGeometry(150, 470, 80, 40)
+        self.pauseButton = QtWidgets.QPushButton("Pause")
         self.pauseButton.setStyleSheet("background-color: red; color: white; border-radius: 5px;")
+        self.pauseButton.setFont(QtGui.QFont("Arial", 16))
+        self.pauseButton.setMinimumHeight(40)
         self.pauseButton.clicked.connect(self.pause_audio)
-
-        self.resumeButton = QtWidgets.QPushButton("Resume", self)
-        self.resumeButton.setGeometry(250, 470, 80, 40)
+        self.resumeButton = QtWidgets.QPushButton("Resume")
         self.resumeButton.setStyleSheet("background-color: blue; color: white; border-radius: 5px;")
+        self.resumeButton.setFont(QtGui.QFont("Arial", 16))
+        self.resumeButton.setMinimumHeight(40)
         self.resumeButton.clicked.connect(self.resume_audio)
+        button_layout.addWidget(self.playButton)
+        button_layout.addWidget(self.pauseButton)
+        button_layout.addWidget(self.resumeButton)
 
-        self.volumeSlider = QtWidgets.QSlider(QtCore.Qt.Horizontal, self)
-        self.volumeSlider.setGeometry(350, 470, 200, 40)
+        self.volumeSlider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
         self.volumeSlider.setRange(0, 100)
         self.volumeSlider.setValue(50)
         self.volumeSlider.valueChanged.connect(self.set_volume)
 
+        left_layout = QtWidgets.QVBoxLayout()
+        left_layout.addWidget(self.listWidget)
+        left_layout.addWidget(self.volumeSlider)
+
+        right_layout = QtWidgets.QVBoxLayout()
+        right_layout.addWidget(self.textEdit)
+        right_layout.addLayout(button_layout)
+
+        self.layout.addLayout(left_layout)
+        self.layout.addLayout(right_layout)
+
         self.setGeometry(500, 300, 700, 550)
         self.show()
+
 
     def get_titles_from_database(self):
         titles = get_story_titles_from_database()
@@ -97,4 +116,3 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     ex = BedStorysGUI()
     sys.exit(app.exec_())
-
