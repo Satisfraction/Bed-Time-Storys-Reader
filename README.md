@@ -25,7 +25,7 @@ Um die Anwendung zu nutzen, folgen Sie diesen Schritten:
 
 ### Option 1: Komplette App (Empfohlen)
 
-1. Laden Sie die neueste Version der Anwendung aus dem [Releases](https://github.com/Satisfraction/Bed-Time-Storys-Reader/releases/tag/v5.1.1) Bereich dieses Repositories herunter.
+1. Laden Sie die neueste Version (BedStorys.zip) der Anwendung aus dem [Releases](https://github.com/Satisfraction/Bed-Time-Storys-Reader/releases/tag/v5.1.1) Bereich dieses Repositories herunter.
 
 2. Entpacken Sie das Archiv und stellen Sie sicher, dass die Datei `bed_storys.db` im selben Verzeichnis wie die Anwendungsdatei `BedStorys.exe` liegt.
 
