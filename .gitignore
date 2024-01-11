@@ -1,3 +1,5 @@
 __pycache__
 build
 setup.py
+dist/BedStorysGUI.exe
+BedStorysGUI.spec
